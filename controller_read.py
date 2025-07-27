@@ -18,12 +18,12 @@ while True:
     pygame.event.pump()
 
     # Example: Read left stick X/Y left (axes 0 and 1)
-    xl_axis = joystick.get_axis(0)  # range: -1.0 to 1.0
-    yl_axis = - joystick.get_axis(1)
+    xl_axis = int(100 * joystick.get_axis(0))  # range: -100.0 to 100.0
+    yl_axis = int(-100 * joystick.get_axis(1))
     
     # Example: Read left stick X/Y right (axes 3 and 4)
-    xr_axis = joystick.get_axis(3)  # range: -1.0 to 1.0
-    yr_axis = - joystick.get_axis(4)
+    xr_axis = int(100 * joystick.get_axis(3))  # range: -100.0 to 100.0
+    yr_axis = int(-100 * joystick.get_axis(4))
 
     # Map to 0?180 for servo angles or normalized commands
     xl_mapped = int((xl_axis + 1) * 90)   # -1?0, 1?180
@@ -34,6 +34,7 @@ while True:
 
     # Send as CSV: "x,y\n"
     message = f"{xl_axis},{yl_axis},{xr_axis},{yr_axis}\n"
-    ser.write(message.encode('utf-8'))
-
+    message = message.encode('utf-8')
+    ser.write(message)
+    print(message)
     time.sleep(0.05)  # 20 Hz update
