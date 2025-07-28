@@ -36,5 +36,5 @@ while True:
     message = f"{xl_axis},{yl_axis},{xr_axis},{yr_axis}\n"
     message = message.encode('utf-8')
     ser.write(message)
-    print(message)
+    # print(message)
     time.sleep(0.05)  # 20 Hz update
